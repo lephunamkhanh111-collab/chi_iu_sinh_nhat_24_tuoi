@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Sinh Nhật</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Hiệu ứng bầu trời sao nền */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: twinkle 2s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Khu vực hiển thị thông điệp */
+        .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .message {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #ff5722;
+            text-shadow: 0 0 10px #ff5722, 0 0 20px #ff9800, 0 0 30px #ff5722, 0 0 40px #f44336;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: zoomInText 3s forwards ease-out;
+        }
+
+        @keyframes zoomInText {
+            0% {
+                opacity: 0;
+                transform: scale(0.2);
+                letter-spacing: -20px;
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+                letter-spacing: 2px;
+            }
+        }
+
+        .line {
+            display: inline-block;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #ff5722, 0 0 20px #ff9800;
+            }
+            to {
+                text-shadow: 0 0 20px #ff5722, 0 0 30px #ffeb3b, 0 0 40px #ff9800;
+            }
+        }
+
+        /* Hiệu ứng trái tim phía dưới */
+        .heart-container {
+            margin-top: 20px;
+            position: relative;
+            width: 50px;
+            height: 50px;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 32px;
+            background: #ff3366;
+            border-radius: 20px 20px 0 0;
+            transform: rotate(-45deg);
+            box-shadow: 0 0 15px #ff3366;
+        }
+
+        .heart::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 20px;
+            width: 20px;
+            height: 32px;
+            background: #ff3366;
+            border-radius: 20px 20px 0 0;
+            transform: rotate(90deg);
+            transform-origin: 0 100%;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Tạo bầu trời sao động bằng JavaScript -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Nội dung lời chúc -->
+    <div class="container">
+        <div class="message">
+            <span class="line">Chúc mừng sinh nhật</span>
+            <span class="line">Chị yêu dấu</span>
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <div class="heart-container">
+                <div class="heart"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tạo các hạt sao ngẫu nhiên trên nền trời
+        const starsContainer = document.getElementById('stars');
+        const numberOfStars = 150;
+
+        for (let i = 0; i < numberOfStars; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            
+            // Kích thước ngẫu nhiên
+            const size = Math.random() * 3 + 1;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            
+            // Vị trí ngẫu nhiên
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
